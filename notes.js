@@ -7,10 +7,9 @@ const getNotes = function () {
 
 const addNote = (title, body) => {
     const notes = loadNotes()
+    const duplicateNote = notes.find((note) => note.title === title)
 
-    const duplicateNotes = notes.filter((note) => note.title == title)
-
-    if (duplicateNotes.length === 0) {
+    if (!duplicateNote) {
         notes.push({
             title: title,
             body: body,
@@ -48,14 +47,14 @@ const listNotes = () => {
 
 const readNote = (title) => {
     notes = loadNotes();
-    myNote = notes.filter(note => note.title == title);
-    if (myNote.length == 0) {
+    myNote = notes.find(note => note.title == title);
+    if (!myNote) {
         console.log(chalk.red.inverse("Note now found"));
     } else {
         console.log(chalk.blue.inverse("Note found"));
         console.log("--------------------")
-        console.log("Title: ", myNote[0].title);
-        console.log("Body: ", myNote[0].body);
+        console.log("Title: ", myNote.title);
+        console.log("Body: ", myNote.body);
         console.log("--------------------")
     }
 }
